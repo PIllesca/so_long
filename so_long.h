@@ -6,7 +6,7 @@
 /*   By: pillesca <pillesca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 12:26:40 by pillesca          #+#    #+#             */
-/*   Updated: 2024/04/22 12:36:15 by pillesca         ###   ########.fr       */
+/*   Updated: 2024/04/30 13:07:55 by pillesca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,14 @@
 
 #include LIBRERIA_PATH
 #include <stdlib.h>
-#define WINDOW_WIDTH 800
-#define WINDOW_HEIGHT 600
+#include <fcntl.h>
+#include "lib/ft_printf/ft_printf.h"
+
+int     ft_error_int(char *str, int code);
+char	*ft_read_map(char *filename);
+void	error_exit(void	*mlx);
+void	draw_map(void *mlx, char **map, size_t x_size, size_t y_size);
+char	**ft_chk_map(char *str, long int *x_size, long int *y_size);
+void	ft_free_map(char **map);
 
 #endif /* SOLONG_H */

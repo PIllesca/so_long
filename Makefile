@@ -6,7 +6,7 @@
 #    By: pillesca <pillesca@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/17 18:46:03 by pillesca          #+#    #+#              #
-#    Updated: 2024/04/30 12:42:47 by pillesca         ###   ########.fr        #
+#    Updated: 2024/04/30 20:49:31 by pillesca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ endif
 LIBSRC = libftprintf.a
 LIBDIR = ./lib/ft_printf
 
-SRC = so_long.c aux_files.c aux_map.c aux_other.c main.c
+SRC = so_long.c aux_files.c aux_map.c aux_other.c aux_path.c key_hook.c main.c
 
 OBJ = $(SRC:.c=.o)
 

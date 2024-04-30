@@ -6,7 +6,7 @@
 /*   By: pillesca <pillesca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 16:26:15 by pillesca          #+#    #+#             */
-/*   Updated: 2024/04/30 13:10:40 by pillesca         ###   ########.fr       */
+/*   Updated: 2024/04/30 23:05:25 by pillesca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,38 @@
 
 void	start_mlx(char *str)
 {
-	void		*mlx;
-	char		**map;
-	long int	x;
-	long int	y;
+	t_data	data;
 
-	map = ft_chk_map(str, &x, &y);
+	data.map.map = ft_chk_map(str, &data.map.x, &data.map.y);
 	free(str);
-	if (map == NULL)
+	if (data.map.map == NULL)
 	{
 		ft_printf("Mapa no leído\n");
 		return ;
 	}
-	mlx = mlx_init(x * 16, y * 16, "My Game", true);
-	if (!mlx)
-		error_exit(mlx);
-	draw_map(mlx, map, x, y);
-	mlx_loop(mlx);
-	mlx_terminate(mlx);
-	ft_free_map(map);
+	if (ft_chk_path(&data))
+		error_exit(data);
+	data.mlx = mlx_init(data.map.x * 16, data.map.y * 16, "My Game", true);
+	if (!data.mlx)
+		error_exit(data);
+	init_player(&data);
+	mlx_key_hook(data.mlx, ft_keyhook, &data);
+	draw_map(data);
+	draw_player(&data);
+	draw_exit(data);
+	mlx_loop(data.mlx);
+	mlx_terminate(data.mlx);
+	ft_free_map(data.map.map);
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	char	*str;
 
-	str = ft_read_map("maps/test.ber");
+	if (argc == 2)
+		str = ft_read_map(argv[1]);
+	else
+		str = ft_read_map("maps/test.ber");
 	if (str)
 	{
 		start_mlx(str);

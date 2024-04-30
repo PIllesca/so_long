@@ -6,7 +6,7 @@
 /*   By: pillesca <pillesca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:59:44 by pillesca          #+#    #+#             */
-/*   Updated: 2024/04/30 15:05:25 by pillesca         ###   ########.fr       */
+/*   Updated: 2024/04/30 23:11:08 by pillesca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	ft_chk_char(char *str)
 	}
 	if (s != 2 || c < 1)
 		return (ft_error_int(
-				"Necesario 1 entrada y salida y más de 1 coleccionable", -1));
+				"Necesario 1 entrada y salida y coleccionables", -1));
 	return (c);
 }
 
@@ -64,20 +64,20 @@ static int	ft_chk_border(char **map, long int x_size)
 	while (i < x_size)
 	{
 		if (map[0][i] != '1' || map[y_size - 1][i] != '1')
-			return (ft_error_int("Borde no válido.",-1));
+			return (ft_error_int("Borde no válido", -1));
 		i++;
 	}
 	i = 0;
 	while (i < y_size)
 	{
 		if (map[i][0] != '1' || map[i][x_size - 1] != '1')
-			return (ft_error_int("Borde no válido.",-1));
+			return (ft_error_int("Borde no válido", -1));
 		i++;
 	}
 	return (y_size);
 }
 
-char	**ft_chk_map(char *str, long int *x_size, long int *y_size)
+char	**ft_chk_map(char *str, int *x_size, int *y_size)
 {
 	char	**map;
 
@@ -86,7 +86,7 @@ char	**ft_chk_map(char *str, long int *x_size, long int *y_size)
 	map = ft_split(str, '\n');
 	if (*map == NULL)
 	{
-		ft_printf("Error al leer el mapa");
+		ft_printf("Error al leer el mapa\n");
 		free(map);
 		return (NULL);
 	}
@@ -98,6 +98,5 @@ char	**ft_chk_map(char *str, long int *x_size, long int *y_size)
 		ft_free_map(map);
 		return (NULL);
 	}
-	ft_printf("Tamaño x:%d y:%d", *x_size, *y_size);
 	return (map);
 }

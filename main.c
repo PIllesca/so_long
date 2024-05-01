@@ -6,11 +6,40 @@
 /*   By: pillesca <pillesca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 16:26:15 by pillesca          #+#    #+#             */
-/*   Updated: 2024/05/01 14:06:10 by pillesca         ###   ########.fr       */
+/*   Updated: 2024/05/01 15:04:23 by pillesca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+void	ft_print_steps(t_data *data)
+{
+	char			str[13];
+	int				j;
+	int				temp;
+	int				n;
+	unsigned int	num;
+
+	n = data->steps;
+	j = 0;
+	if (n < 0)
+		num = -n;
+	else
+		num = n;
+	if (num == 0)
+		str[j++] = '0';
+	while (num != 0)
+	{
+		temp = num % 10;
+		str[j++] = temp + '0';
+		num /= 10;
+	}
+	if (n < 0)
+		str[j++] = '-';
+	str[j++] = '\0';
+	ft_invstr(str);
+	mlx_put_string(data->mlx, str, 0, 0);
+}
 
 static int	ft_chk_ext(char *str)
 {

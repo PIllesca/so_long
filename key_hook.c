@@ -6,7 +6,7 @@
 /*   By: pillesca <pillesca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 20:45:29 by pillesca          #+#    #+#             */
-/*   Updated: 2024/05/01 14:03:47 by pillesca         ###   ########.fr       */
+/*   Updated: 2024/05/01 15:27:25 by pillesca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,9 @@ static void	ft_move_player(t_data *data, int x, int y, char c)
 	draw_tile(*data, '0', data->player.x, data->player.y);
 	data->steps++;
 	ft_printf("Pasos: %d\n", data->steps);
+	draw_tile(*data, '1', 0, 0);
+	draw_tile(*data, '1', 1, 0);
+	ft_print_steps(data);
 	if (data->map.map[data->player.y][data->player.x] == 'E')
 		draw_exit(*data);
 	if (c == 'w')
@@ -82,7 +85,7 @@ void	ft_keyhook(mlx_key_data_t key, void *param)
 	}
 	else
 	{
-		if (key.action == MLX_PRESS)
+		if (key.action != MLX_RELEASE)
 		{
 			if (key.key == MLX_KEY_A)
 				ft_move_player(data, -1, 0, 'a');

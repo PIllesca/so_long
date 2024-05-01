@@ -6,7 +6,7 @@
 /*   By: pillesca <pillesca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 12:26:40 by pillesca          #+#    #+#             */
-/*   Updated: 2024/05/01 14:03:10 by pillesca         ###   ########.fr       */
+/*   Updated: 2024/05/01 15:04:58 by pillesca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,6 @@ char	**ft_chk_map(char *str, int *x_size, int *y_size);
 int		ft_chk_path(t_data *data);
 void	ft_free_map(char **map);
 void	ft_keyhook(mlx_key_data_t key, void *param);
+void	ft_print_steps(t_data *data);
 
 #endif /* SOLONG_H */

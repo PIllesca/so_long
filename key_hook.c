@@ -6,7 +6,7 @@
 /*   By: pillesca <pillesca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 20:45:29 by pillesca          #+#    #+#             */
-/*   Updated: 2024/04/30 23:53:27 by pillesca         ###   ########.fr       */
+/*   Updated: 2024/05/01 12:56:55 by pillesca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,16 @@ void	ft_keyhook(mlx_key_data_t key, void *param)
 	}
 	else
 	{
-		if (key.key == MLX_KEY_A)
-			ft_move_player(data, -1, 0, 'a');
-		if (key.key == MLX_KEY_W)
-			ft_move_player(data, 0, -1, 'w');
-		if (key.key == MLX_KEY_S)
-			ft_move_player(data, 0, 1, 's');
-		if (key.key == MLX_KEY_D)
-			ft_move_player(data, 1, 0, 'd');
+		if (key.action == MLX_PRESS)
+		{
+			if (key.key == MLX_KEY_A)
+				ft_move_player(data, -1, 0, 'a');
+			if (key.key == MLX_KEY_W)
+				ft_move_player(data, 0, -1, 'w');
+			if (key.key == MLX_KEY_S)
+				ft_move_player(data, 0, 1, 's');
+			if (key.key == MLX_KEY_D)
+				ft_move_player(data, 1, 0, 'd');
+		}
 	}
 }

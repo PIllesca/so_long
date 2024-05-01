@@ -6,7 +6,7 @@
 /*   By: pillesca <pillesca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 16:26:15 by pillesca          #+#    #+#             */
-/*   Updated: 2024/05/01 13:11:34 by pillesca         ###   ########.fr       */
+/*   Updated: 2024/05/01 14:06:10 by pillesca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,15 @@ int	main(int argc, char **argv)
 {
 	char	*str;
 
-	if (ft_chk_ext(argv[1]) != 0)
-	{
-		ft_printf("Extensión de archivo distinta a .ber\n");
-		exit(EXIT_FAILURE);
-	}
 	if (argc == 2)
+	{
+		if (ft_chk_ext(argv[1]) != 0)
+		{
+			ft_printf("Extensión de archivo distinta a .ber\n");
+			exit(EXIT_FAILURE);
+		}
 		str = ft_read_map(argv[1]);
+	}
 	else
 		str = ft_read_map("maps/test.ber");
 	if (str)

@@ -6,27 +6,22 @@
 /*   By: pillesca <pillesca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 12:26:40 by pillesca          #+#    #+#             */
-/*   Updated: 2024/04/30 23:23:55 by pillesca         ###   ########.fr       */
+/*   Updated: 2024/05/01 14:03:10 by pillesca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SOLONG_H
-#define SOLONG_H
+#ifndef SO_LONG_H
+# define SO_LONG_H
 
-#ifdef __linux__
-    // Definiciones para Linux
-    #define LIBRERIA_PATH "wslMLX42/MLX42.h"
-#elif defined(__APPLE__)
-    // Definiciones para macOS
-    #define LIBRERIA_PATH "MLX42/MLX42.h"
-#else
-    #error "Sistema operativo no soportado"
-#endif
+# ifdef __linux__
+#  include "wslMLX42/MLX42.h"
+# else
+#  include "MLX42/MLX42.h"
+# endif
 
-#include LIBRERIA_PATH
-#include <stdlib.h>
-#include <fcntl.h>
-#include "lib/ft_printf/ft_printf.h"
+# include <stdlib.h>
+# include <fcntl.h>
+# include "lib/ft_printf/ft_printf.h"
 
 typedef struct s_map
 {
@@ -58,7 +53,7 @@ typedef struct s_data
 	t_play	player;
 }				t_data;
 
-int     ft_error_int(char *str, int code);
+int		ft_error_int(char *str, int code);
 char	*ft_read_map(char *filename);
 void	error_exit(t_data data);
 void	draw_tile(t_data data, char c, int x, int y);
@@ -67,7 +62,7 @@ void	init_player(t_data *data);
 void	draw_player(t_data *data);
 void	draw_exit(t_data data);
 char	**ft_chk_map(char *str, int *x_size, int *y_size);
-int     ft_chk_path(t_data *data);
+int		ft_chk_path(t_data *data);
 void	ft_free_map(char **map);
 void	ft_keyhook(mlx_key_data_t key, void *param);
 

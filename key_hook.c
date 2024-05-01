@@ -6,7 +6,7 @@
 /*   By: pillesca <pillesca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 20:45:29 by pillesca          #+#    #+#             */
-/*   Updated: 2024/05/01 12:56:55 by pillesca         ###   ########.fr       */
+/*   Updated: 2024/05/01 14:03:47 by pillesca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	ft_exit(t_data *data)
 	exit(EXIT_SUCCESS);
 }
 
-static void ft_chk_pos(t_data *data)
+static void	ft_chk_pos(t_data *data)
 {
 	if (data->map.map[data->player.y][data->player.x] == 'c')
 	{

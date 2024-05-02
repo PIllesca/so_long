@@ -6,7 +6,7 @@
 /*   By: pillesca <pillesca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 19:54:51 by pillesca          #+#    #+#             */
-/*   Updated: 2024/04/30 23:48:20 by pillesca         ###   ########.fr       */
+/*   Updated: 2024/05/02 17:50:25 by pillesca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,7 @@ void	draw_exit(t_data data)
 		t_sprite = mlx_load_png("./textures/Coffer.png");
 	if (!t_sprite)
 		error_exit(data);
-	else
-		i_sprite = mlx_texture_to_image(data.mlx, t_sprite);
+	i_sprite = mlx_texture_to_image(data.mlx, t_sprite);
 	if (!i_sprite)
 		error_exit(data);
 	if (mlx_image_to_window(

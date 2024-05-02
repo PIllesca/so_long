@@ -6,7 +6,7 @@
 /*   By: pillesca <pillesca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 12:26:40 by pillesca          #+#    #+#             */
-/*   Updated: 2024/05/01 15:04:58 by pillesca         ###   ########.fr       */
+/*   Updated: 2024/05/02 17:56:03 by pillesca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include "lib/ft_printf/ft_printf.h"
+# include "lib/libft/libft.h"
 
 typedef struct s_map
 {

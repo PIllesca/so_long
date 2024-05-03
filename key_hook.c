@@ -6,7 +6,7 @@
 /*   By: pillesca <pillesca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 20:45:29 by pillesca          #+#    #+#             */
-/*   Updated: 2024/05/01 15:27:25 by pillesca         ###   ########.fr       */
+/*   Updated: 2024/05/03 17:23:31 by pillesca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,7 @@ void	draw_player(t_data *data)
 	if (mlx_image_to_window(
 			data->mlx, data->player.i_p, data->player.x * 16,
 			data->player.y * 16) < 0)
-		error_exit(*data);
-}
-
-static int	ft_exit(t_data *data)
-{
-	ft_printf("Cerrando. Pasos: %d\n", data->steps);
-	mlx_close_window(data->mlx);
-	mlx_terminate(data->mlx);
-	ft_free_map(data->map.map);
-	exit(EXIT_SUCCESS);
+		error_exit(data);
 }
 
 static void	ft_chk_pos(t_data *data)
@@ -35,28 +26,29 @@ static void	ft_chk_pos(t_data *data)
 	{
 		data->c++;
 		data->map.map[data->player.y][data->player.x] = '0';
-		ft_printf("Colleccionables: %d ", data->c);
-		ft_printf("restantes: %d\n", data->map.c - data->c);
-		draw_exit(*data);
+		ft_printf("Collectables: %d ", data->c);
+		ft_printf("Remaining: %d\n", data->map.c - data->c);
+		draw_exit(data);
 	}
 	if (data->map.map[data->player.y][data->player.x] == 'E'
 		&& data->c == data->map.c)
 	{
-		ft_printf("¡Ganaste! ");
-		ft_exit(data);
+		ft_printf("You Won! ");
+		mlx_close_window(data->mlx);
+		success_exit(data);
 	}
 }
 
 static void	ft_move_player(t_data *data, int x, int y, char c)
 {
-	draw_tile(*data, '0', data->player.x, data->player.y);
+	draw_tile(data, '0', data->player.x, data->player.y);
 	data->steps++;
-	ft_printf("Pasos: %d\n", data->steps);
-	draw_tile(*data, '1', 0, 0);
-	draw_tile(*data, '1', 1, 0);
+	ft_printf("Steps: %d\n", data->steps);
+	draw_tile(data, '1', 0, 0);
+	draw_tile(data, '1', 1, 0);
 	ft_print_steps(data);
 	if (data->map.map[data->player.y][data->player.x] == 'E')
-		draw_exit(*data);
+		draw_exit(data);
 	if (c == 'w')
 		data->player.i_p = data->player.i_u;
 	if (c == 's')
@@ -81,7 +73,9 @@ void	ft_keyhook(mlx_key_data_t key, void *param)
 	data = (t_data *)param;
 	if (key.key == MLX_KEY_ESCAPE)
 	{
-		ft_exit(data);
+		ft_printf("Closing. Steeps: %d\n", data->steps);
+		mlx_close_window(data->mlx);
+		success_exit(data);
 	}
 	else
 	{

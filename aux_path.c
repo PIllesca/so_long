@@ -6,7 +6,7 @@
 /*   By: pillesca <pillesca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 15:11:31 by pillesca          #+#    #+#             */
-/*   Updated: 2024/04/30 23:11:43 by pillesca         ###   ########.fr       */
+/*   Updated: 2024/05/03 16:51:35 by pillesca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,9 @@ void	ft_text_map(t_data *data)
 		x = 0;
 		while (x < data->map.x)
 		{
-			ft_printf("%c", data->map.map[y][x]);
 			x++;
 		}
 		y++;
-		ft_printf("\n");
 	}
 }
 
@@ -100,14 +98,9 @@ int	ft_chk_path(t_data *data)
 	data->c = data->map.c;
 	ft_text_map(data);
 	ft_dfs(data, data->player.x, data->player.y, &valid);
-	ft_printf("Posición inicial: [%d,%d]\n", data->player.x, data->player.y);
-	ft_printf("Coleccionables en mapa: %d\n", data->map.c);
-	ft_printf("Coleccionables inalcanzables: %d\n", data->c);
-	if (valid && data->c == 0)
-		ft_printf("Ruta válida.\n");
-	else
+	if (valid && data->c != 0)
 	{
-		ft_printf("Ruta no válida.\n");
+		ft_printf("Invalid path.\n");
 		return (1);
 	}
 	return (0);

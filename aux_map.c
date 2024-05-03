@@ -6,7 +6,7 @@
 /*   By: pillesca <pillesca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:59:44 by pillesca          #+#    #+#             */
-/*   Updated: 2024/04/30 23:11:08 by pillesca         ###   ########.fr       */
+/*   Updated: 2024/05/03 16:47:20 by pillesca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	ft_chk_char(char *str)
 	{
 		if (*str != '0' && *str != '1' && *str != 'C'
 			&& *str != 'E' && *str != 'P' && *str != '\n')
-			return (ft_error_int("Carácter no válido en mapa", -1));
+			return (ft_error_int("Invalid char on map file", -1));
 		if (*str == 'C')
 			c++;
 		if (*str == 'E' || *str == 'P')
@@ -32,7 +32,7 @@ static int	ft_chk_char(char *str)
 	}
 	if (s != 2 || c < 1)
 		return (ft_error_int(
-				"Necesario 1 entrada y salida y coleccionables", -1));
+				"There should be 1 Entrance, 1 exit and collectables", -1));
 	return (c);
 }
 
@@ -44,7 +44,7 @@ static long int	ft_chk_xlen(char **map)
 	while (*map != NULL)
 	{
 		if (len != ft_strlen(*map))
-			return (ft_error_int("Error. Mapa no rectangular", -1));
+			return (ft_error_int("Error. Map is not rectangular", -1));
 		map++;
 	}
 	return (len);
@@ -64,14 +64,14 @@ static int	ft_chk_border(char **map, long int x_size)
 	while (i < x_size)
 	{
 		if (map[0][i] != '1' || map[y_size - 1][i] != '1')
-			return (ft_error_int("Borde no válido", -1));
+			return (ft_error_int("Invalid Map Limit", -1));
 		i++;
 	}
 	i = 0;
 	while (i < y_size)
 	{
 		if (map[i][0] != '1' || map[i][x_size - 1] != '1')
-			return (ft_error_int("Borde no válido", -1));
+			return (ft_error_int("Invalid Map Limit", -1));
 		i++;
 	}
 	return (y_size);
@@ -86,7 +86,7 @@ char	**ft_chk_map(char *str, int *x_size, int *y_size)
 	map = ft_split(str, '\n');
 	if (*map == NULL)
 	{
-		ft_printf("Error al leer el mapa\n");
+		ft_printf("Error encountered when reading map\n");
 		free(map);
 		return (NULL);
 	}
@@ -94,7 +94,7 @@ char	**ft_chk_map(char *str, int *x_size, int *y_size)
 	*y_size = ft_chk_border(map, *x_size);
 	if (*x_size <= 0 || *y_size <= 0)
 	{
-		ft_printf("Mapa no válido\n");
+		ft_printf("Invalid map\n");
 		ft_free_map(map);
 		return (NULL);
 	}

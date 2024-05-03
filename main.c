@@ -6,7 +6,7 @@
 /*   By: pillesca <pillesca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 16:26:15 by pillesca          #+#    #+#             */
-/*   Updated: 2024/05/01 15:04:23 by pillesca         ###   ########.fr       */
+/*   Updated: 2024/05/03 17:21:16 by pillesca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,39 +59,47 @@ void	start_mlx(char *str)
 	free(str);
 	if (data.map.map == NULL)
 	{
-		ft_printf("Mapa no leído\n");
+		ft_printf("Map wasn't read\n");
 		return ;
 	}
 	if (ft_chk_path(&data))
-		error_exit(data);
+		error_exit(&data);
 	data.mlx = mlx_init(data.map.x * 16, data.map.y * 16, "My Game", true);
 	if (!data.mlx)
-		error_exit(data);
+		error_exit(&data);
 	init_player(&data);
 	mlx_key_hook(data.mlx, ft_keyhook, &data);
-	draw_map(data);
+	draw_map(&data);
 	draw_player(&data);
-	draw_exit(data);
+	draw_exit(&data);
 	mlx_loop(data.mlx);
-	mlx_terminate(data.mlx);
-	ft_free_map(data.map.map);
+	success_exit(&data);
+}
+
+void	ft_leaks(void)
+{
+	system("leaks -q so_long");
 }
 
 int	main(int argc, char **argv)
 {
 	char	*str;
 
-	if (argc == 2)
+	atexit(ft_leaks);
+	if (argc > 1)
 	{
 		if (ft_chk_ext(argv[1]) != 0)
 		{
-			ft_printf("Extensión de archivo distinta a .ber\n");
+			ft_printf("Wrong file extension. Expected .ber\n");
 			exit(EXIT_FAILURE);
 		}
 		str = ft_read_map(argv[1]);
 	}
 	else
-		str = ft_read_map("maps/test.ber");
+	{
+		ft_printf("A .ber map is needed\n");
+		exit(EXIT_FAILURE);
+	}
 	if (str)
 	{
 		start_mlx(str);

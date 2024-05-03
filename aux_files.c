@@ -6,7 +6,7 @@
 /*   By: pillesca <pillesca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 14:58:12 by pillesca          #+#    #+#             */
-/*   Updated: 2024/04/29 17:44:11 by pillesca         ###   ########.fr       */
+/*   Updated: 2024/05/03 16:57:23 by pillesca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,13 @@ char	*ft_read_map(char *filename)
 	fd = open(filename, 0);
 	if (fd < 0 || read(fd, 0, 0) == -1)
 	{
-		ft_printf("Error de lectura\n");
+		ft_printf("Read Error\n");
 		return (NULL);
 	}
 	buffer = ft_calloc(1, sizeof(char));
 	if (!buffer)
 	{
-		ft_printf("Error de lectura\n");
+		ft_printf("Read Error\n");
 		return (NULL);
 	}
 	buffer = ft_read_file(fd, buffer);

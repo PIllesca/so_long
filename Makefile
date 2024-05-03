@@ -6,12 +6,17 @@
 #    By: pillesca <pillesca@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/17 18:46:03 by pillesca          #+#    #+#              #
-#    Updated: 2024/05/03 14:09:22 by pillesca         ###   ########.fr        #
+#    Updated: 2024/05/03 22:00:26 by pillesca         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-INCLUDES = -I/MLX42/include
-MLX42 = ./MLX42/libmlx42.a -LMLX42 -lMLX42 -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
+ifeq ($(shell uname), Linux)
+    INCLUDES = -I/wslMLX42/include
+	MLX42 = ./wslMLX42/libmlx42.a -Iinclude -ldl -lglfw -pthread -lm
+else
+    INCLUDES = -I/MLX42/include
+	MLX42 = ./MLX42/libmlx42.a -LMLX42 -lMLX42 -Iinclude -lglfw -L"/Users/$(USER)/.brew/opt/glfw/lib/"
+endif
 
 PRINTSRC = libftprintf.a
 PRINTDIR = ./lib/ft_printf
@@ -48,8 +53,8 @@ clean:
 	
 fclean: clean
 	$(RM) $(NAME)
-	$(RM) $(PRINTSRC)
-	$(RM) $(LIBFTSRC)
+	make fclean -C $(PRINTDIR)
+	make fclean -C $(LIBFTDIR)
 
 re:	fclean all
 

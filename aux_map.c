@@ -6,7 +6,7 @@
 /*   By: pillesca <pillesca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 17:59:44 by pillesca          #+#    #+#             */
-/*   Updated: 2024/05/03 16:47:20 by pillesca         ###   ########.fr       */
+/*   Updated: 2024/05/03 17:45:03 by pillesca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,27 @@ static int	ft_chk_char(char *str)
 		return (ft_error_int(
 				"There should be 1 Entrance, 1 exit and collectables", -1));
 	return (c);
+}
+
+
+
+static int	ft_chk_nline(char *str)
+{
+	size_t	len;
+	int		i;
+
+	len = ft_strlen(str);
+	i = 1;
+	while (i < (int)len - 1)
+	{
+		if (str[i] == '\n' && str[i - 1] != '\n' && str[i + 1] == '\n')
+		{
+			ft_printf("New line in the middle of the map file\n");
+			return (-1);
+		}
+		i++;
+	}
+	return (0);
 }
 
 static long int	ft_chk_xlen(char **map)
@@ -82,6 +103,8 @@ char	**ft_chk_map(char *str, int *x_size, int *y_size)
 	char	**map;
 
 	if (ft_chk_char(str) <= 0)
+		return (NULL);
+	if (ft_chk_nline(str) < 0)
 		return (NULL);
 	map = ft_split(str, '\n');
 	if (*map == NULL)
